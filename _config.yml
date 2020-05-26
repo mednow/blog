@@ -4,7 +4,7 @@ title: "Physician Now"
 description: "Medical Science, Healthcare Policy and Social Psychology."
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/logo.png'
-baseurl: /
+baseurl: ""
 google_analytics: 'UA-167456021-1'
 disqus: 'physician-now-sh'
 mailchimp-list: ''
