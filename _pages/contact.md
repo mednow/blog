@@ -1,5 +1,5 @@
 ---
-layout: contact-page
+layout: page
 title: Contact
 permalink: /contact
 comments: false
