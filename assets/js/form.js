@@ -1,6 +1,6 @@
  var currentLocation = window.location.href;
 
- if (currentLocation == "https://physician.now.sh/contact"){
+ if (currentLocation == "https://physician.now.sh/contact.html"){
 
   window.addEventListener("DOMContentLoaded", function() {
 
