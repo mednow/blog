@@ -1,66 +1,72 @@
-# Jekyll configuration
-#markdown: redcarpet
-#highlighter: pygments
+# Site
+name: "Physician Now"
+title: "Physician Now"
+description: "Medical Science, Healthcare Policy and Social Psychology."
+logo: 'assets/images/logo.png'
+favicon: 'assets/images/logo.png'
+baseurl: ''
+google_analytics: 'UA-167456021-1'
+disqus: 'physician-now-sh'
+mailchimp-list: 'https://wowthemes.us11.list-manage.com/subscribe/post?u=&amp;id=8c3d2d214b'
+include: ["_pages"]
+permalink: /:title/
+email: editor@physiciannow.net
+
+# Authors
+authors:
+  Han:
+    name: Dr. Han
+    display_name: Dr. Han
+    gravatar: e56154546cf4be74e393c62d1ae9f9d4
+    email: editor@republicly.net
+    web: https://physician.now.sh
+    twitter: https://twitter.com/republicly
+    description: "Physician, Medical technology enthusiast and Healthcare analyst."
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-archives
+  - jekyll-figure
+    
+# Archives
+jekyll-archives:
+  enabled:
+    - categories
+  layout: archive
+  permalinks:
+    category: '/category/:name/'
+    
+# Pagination 
+paginate: 6
+paginate_path: /page:num/
+    
+# Other
+highlighter: none
 markdown: kramdown
-highlighter: rouge
-paginate: 5
-language: 'en-uk'
+kramdown:
+   syntax_highlighter_opts:
+      disable : true
 
-# Website info
-name: 'Physician Now'
-description: ""
+gem: [jekyll-admin]
 
-short_url: 'physician.now.sh'
-google_analytics: 
-disqus: username
-# edit baseurl to simply '/' if using as your personal page (instead of a project page)
-baseurl: /
+# Adsense (change to "enabled" to activate, also your client id and ad slot. Create a new ad unit from your Adsense account to get the slot.)
+adsense: "disabled"
+adsense-data-ad-client: "ca-pub-88"
+adsense-data-ad-slot: "1663087678"
 
-# Permalinks
-permalink: /:title
-# permalink: /author/:username
-# permalink: /tag/:tag
+# Lazy Images ("enabled" or "disabled")
+lazyimages: "enabled"
 
-# gems and other configs
-plugins: [jekyll-paginate]
+# Post Author Box ("enabled" or "disabled")
+authorbox: "enabled"
 
-# Additional settings available on the front-matter
-# Site logo in the index.html (as in demo.ghost.io)
-# Author's page cover in _layouts/author.html
-# The same for page.html and tag.html layouts
-# Post's page cover as a per-post basis _posts/...
-# Disqus comments as a per-post basis
-# ...
+# Sass
+sass:
+  sass_dir: _sass
+  style: compressed
 
-
-# Settings for builing master branch with travis-ci
-# with jekyll-travis
-
-# Settings for deploy rake task
-# Username and repo of Github repo, e.g.
-# https://github.com/USERNAME/REPO.git
-# username defaults to ENV['GIT_NAME'] used by Travis
-# repo defaults to USERNAME.github.io
-# Branch defaults to "source" for USERNAME.github.io
-# or "master" otherwise
-safe: false
-lsi: false
-username: jekyller
-repo: jasper
-branch: master
-relative_source: ../jasper/
-destination: ../jasper-pages/
-production_url:  https://jekyller.github.io/jasper/
-source_url:  https://github.com/jekyller/jasper/
-
-exclude:
-  - README.md
-  - Rakefile
-  - Gemfile
-  - Gemfile.lock
-  - changelog.md
-  - "*.Rmd"
-  - vendor
-  - .travis.yml
-  - node_modules
-  - .git
+exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock]

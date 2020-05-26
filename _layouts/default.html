@@ -1,64 +1,142 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <!-- Document Settings -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Page Meta -->
-    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.name }}{% endif %}</title>
-    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
+<link rel="icon" href="{{ site.baseurl }}/assets/images/logo.png">
 
-    <!-- Mobile Meta -->
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{ page.title }} | {{site.name}}</title>
 
-    <!-- Brand icon -->
-    <link rel="shortcut icon" href="{{ site.baseurl }}assets/images/favicon.ico" >
+{% seo %}
+    
+<link href="{{ site.baseurl }}/assets/css/prism.css" rel="stylesheet">
 
-    <!-- Styles'n'Scripts -->
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/css/screen.css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}assets/css/syntax.css" />
+<link href="{{ site.baseurl }}/assets/css/theme.css" rel="stylesheet">
 
-    <!-- highlight.js -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css">
-    <style>.hljs { background: none; }</style>
-
-    <!-- Ghost outputs important style and meta data with this tag -->
-    {% include head.html %}
+<script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
 
 </head>
-<body class="{% if paginator.page > 1 %}paged archive-template{% elsif page.class %}{{ page.class }}{% else %}home-template{% endif %} nav-closed">
 
-    <!-- The blog navigation links -->
-    {% include navigation.html %}
+{% if jekyll.environment == 'production' %}
+<!-- change your GA id in _config.yml -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', '{{site.google_analytics}}', 'auto');
+ga('send', 'pageview');
+</script>
+{% endif %}
 
-    <div class="site-wrapper">
+{% capture layout %}{% if page.layout %}layout-{{ page.layout }}{% endif %}{% endcapture %}
+<body>
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Sen:400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	</noscript>
 
-        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+<!-- Begin Sidebar Navigation
+================================================== -->
+
+<div class="sidebar">    
+</div>   
+<div class="nav-icon">
+    <div class="hamburger-bar"></div>
+</div>
+<div id="blackover-nav" class="blackover"></div>
+<nav id="menu">
+    <ul>
+        <h3>Navigation</h3>
+        <li><a href="{{ site.baseurl }}/">Home</a></li>
+        <li><a href="{{ site.baseurl }}/about">About</a></li>   
+        <li><a href="{{ site.baseurl }}/contact">Contact</a></li>       
+    </ul>   
+</nav>
+
+{% include search-lunr.html %}
+
+
+<!-- End Sidebar Navigation
+================================================== -->
+
+<div class="site-content {% if page.url == '/' %} firstpage {% endif %}">
+
+<div class="container">
+
+    <!-- Site Logo/Name
+    ================================================== -->
+   
+    <a class="navbar-brand" href="{{ site.baseurl }}/">
+        <img src="{{ site.baseurl }}/{{ site.logo }}" alt="{{ site.name }}">
+    </a>  
+   
+
+    <!-- Site Tag
+    ================================================== -->
+    {% if page.url == '/' %}
+        <p class="sitetag">
+            {{ site.description }}
+        </p>
+    {% endif %}
+
+    <!-- Content
+    ================================================== -->
+    <div class="main-content">
         {{ content }}
-
-        <!-- The tiny footer at the very bottom -->
-        <footer class="site-footer clearfix">
-          <section class="copyright"><a href="{{ site.baseurl }}">{{ site.name }}</a> &copy; {{  site.time | date: '%Y' }}</section>
-          <section class="poweredby">Proudly published with <a target="_blank" href="https://jekyllrb.com/">Jekyll</a> and  <a target="_blank" href="https://vercel.co">Vercel</a></section>
-        </footer>
     </div>
-    <!-- highlight.js -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
 
-    <!-- jQuery needs to come before `{{ghost_foot}}` so that jQuery can be used in code injection -->
-    <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-    <!-- Ghost outputs important scripts and data with this tag -->
-    <!-- {{ghost_foot}} -->
-    <!-- Add Google Analytics  -->
-    {% include analytics.html %}
-    <!-- Fitvids makes video embeds responsive and awesome -->
-    <script type="text/javascript" src="{{ site.baseurl }}assets/js/jquery.fitvids.js"></script>
-    <!-- The main JavaScript file for Casper -->
-    <script type="text/javascript" src="{{ site.baseurl }}assets/js/index.js"></script>
+    {% if site.mailchimp-list %}
+    <!-- Newsletter
+    ================================================== -->
+    <div class="newsletter text-center">
+        <span class="h4"><img src="{{ site.baseurl }}/{{ site.logo }}" class="newsletter-logo" alt="{{site.title}}"> &nbsp; Our newsletter is sent weekly with the most important articles from the week. Strict No Spam Policy. </span>
+        <form action="{{site.mailchimp-list}}" method="post" name="mc-embedded-subscribe-form" class="wj-contact-form validate" target="_blank" novalidate>
+            <div class="mc-field-group d-inline-flex">
+            <input type="email" placeholder="Your e-mail" name="EMAIL" class="required email" id="mce-EMAIL" autocomplete="on" required>
+            <input type="submit" value="Subscribe" name="subscribe" class="heart">
+            </div>
+        </form>
+    </div>
+    {% endif %}
+    
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 text-center text-lg-left">
+                Copyright © {{ site.time | date: "%Y" }} {{ site.name }} 
+            </div>
+            <div class="col-md-6 col-sm-12 text-center text-lg-right">    
+                Proudly Powered by Vercel and Jekyll.
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts (if you need bootstrap.js, please add it yourself. I didn't use it for performance reasons, it was not needed in this theme)
+================================================== -->
+
+<script src="{{ site.baseurl }}/assets/js/prism.js"></script>
+
+<script src="{{ site.baseurl }}/assets/js/theme.js"></script>
+
+{% if site.lazyimages == "enabled" %}
+<script src="{{ site.baseurl }}/assets/js/lazyload.js"></script>
+{% endif %}
+
+{% if page.layout == 'post' %}
+<script id="dsq-count-scr" src="//{{site.disqus}}.disqus.com/count.js"></script>
+{% endif %}
 
 </body>
 </html>
